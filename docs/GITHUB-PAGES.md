@@ -28,7 +28,23 @@ npm run preview -- --host 0.0.0.0 --port 3001
 
 Encerre antes outra prévia que esteja usando a porta 3001. No celular, use `http://IP-DO-COMPUTADOR:3001/siteadam/`. O firewall do Windows precisa permitir essa conexão na rede privada. Esse comando é para teste local, não para expor o computador à internet.
 
-## Ativar a publicação
+## Publicação manual usada neste repositório
+
+Endereço: **https://ronycorrea.github.io/siteadam/**.
+
+Em **Settings → Pages**, mantenha **Deploy from a branch → gh-pages → / (root)**. Na pasta do projeto, execute:
+
+```bash
+npm run deploy
+```
+
+O `predeploy` gera novamente `out/` e executa a verificação de publicação. Só depois o `gh-pages` envia essa pasta, com a opção `--nojekyll`. Esse comando publica de verdade; para apenas gerar e conferir os arquivos, execute `npm run build` e `npm run check:publication`.
+
+O `.nojekyll` precisa estar na raiz da branch publicada. Ter apenas `public/.nojekyll` no código ou `out/.nojekyll` no computador não basta: o `gh-pages` ignora arquivos iniciados por ponto por padrão. Sem esse marcador, o processamento Jekyll ignora `_next/`, causando 404 nos arquivos de CSS e JavaScript e deixando o site sem layout e interações.
+
+A URL pública já é o padrão dos metadados. Se usar `.env.local` ou `.env.production`, não sobrescreva `NEXT_PUBLIC_SITE_URL` com localhost na compilação que será publicada.
+
+## Alternativa: publicação por GitHub Actions
 
 1. Crie ou use o repositório no GitHub. Coloque `package.json`, `src/` e `.github/` na raiz dele.
 2. Envie os arquivos do projeto, incluindo `package-lock.json`. Mantenha `.gitignore`; `node_modules/`, `.next/`, `out/`, resultados dos testes e variáveis locais não entram no repositório.
@@ -55,7 +71,7 @@ O `basePath` é aplicado automaticamente aos componentes `Link`. Os arquivos pú
 
 O `postbuild` executa `scripts/finalize-export.mjs`. Na versão 16.3.7, o exportador do Next usa separadores do Windows em alguns nomes de arquivos de navegação, enquanto o navegador solicita nomes com pontos. O script normaliza somente esses arquivos dentro de `out/`. Em uma exportação já correta, incluindo o build Linux do GitHub Actions, não há renomeações. Nenhuma regra especial de servidor é necessária para compensar o problema.
 
-`scripts/generate-social-image.mjs` produz um PNG de 1200 × 630 antes do build. As tags Open Graph e Twitter usam uma URL absoluta, com domínio e subpasta corretos. O workflow fornece o domínio verdadeiro; a exportação local usa localhost. Não publique manualmente uma compilação que ainda tenha localhost nas tags de compartilhamento.
+`scripts/generate-social-image.mjs` produz um PNG de 1200 × 630 antes do build. As tags Open Graph e Twitter usam uma URL absoluta, com domínio e subpasta corretos. O padrão é `https://ronycorrea.github.io/siteadam`; o workflow pode fornecer outro domínio. Não publique uma compilação que tenha localhost nas tags de compartilhamento.
 
 ## O que conferir depois da publicação
 
@@ -65,7 +81,7 @@ O `postbuild` executa `scripts/finalize-export.mjs`. Na versão 16.3.7, o export
 - Ative **Enforce HTTPS** em Settings → Pages quando disponível. Confirme a navegação pelo endereço HTTPS final.
 - A prévia local verifica o PNG e as tags. A miniatura efetiva no WhatsApp ou LinkedIn só pode ser conferida depois de haver uma URL pública; esses serviços também podem manter imagens em cache.
 
-Nenhuma publicação foi executada pela conversão local. O repositório e o domínio reais são definidos na sua conta do GitHub.
+A geração local não publica arquivos. O envio acontece apenas ao executar `npm run deploy` ou ao acionar o workflow configurado no GitHub.
 
 ## Referências oficiais
 

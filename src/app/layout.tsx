@@ -9,7 +9,7 @@ const title = "A.D.A.M. | Assistente de Diagnóstico Automatizado de Máquinas";
 const description =
   "Plataforma para monitoramento, diagnóstico e gerenciamento centralizado de computadores em laboratórios de informática.";
 const siteUrl = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001",
+  process.env.NEXT_PUBLIC_SITE_URL || "https://ronycorrea.github.io/siteadam",
 );
 const socialImage = {
   url: assetPath("/images/social-preview.png"),

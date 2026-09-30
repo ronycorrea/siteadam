@@ -17,7 +17,8 @@
     "check:publication": "node scripts/check-publication.mjs",
     "audit:dependencies": "npm audit --audit-level=high",
     "format": "prettier --write src scripts tests *.ts *.mjs *.json README.md docs .github",
-    "deploy": "gh-pages -d out"
+    "predeploy": "npm run build && npm run check:publication",
+    "deploy": "gh-pages -d out --nojekyll"
   },
   "keywords": [],
   "author": "",

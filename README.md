@@ -143,13 +143,15 @@ Os testes verificam as sete rotas, metadata, erros JavaScript, pontos clicáveis
 
 Leia também a [revisão de segurança e pendências de atualização](docs/SECURITY-REVIEW.md).
 
-1. Envie o código para um repositório no GitHub, com os arquivos deste diretório na raiz.
-2. Em **Settings → Pages → Build and deployment → Source**, selecione **GitHub Actions**.
-3. Execute o workflow **Validar e publicar no GitHub Pages**, pela aba Actions ou por um push na branch `main`.
-4. O workflow detecta o domínio e a subpasta, gera `out/`, testa essa exportação e publica somente após os testes passarem.
-5. Confira o endereço público informado pelo GitHub. Instruções completas: [docs/GITHUB-PAGES.md](docs/GITHUB-PAGES.md).
+O endereço deste projeto é **https://ronycorrea.github.io/siteadam/**. Para a publicação manual pela branch `gh-pages`:
 
-O site publicado não requer processo Node ou Python, banco de dados ou backend do A.D.A.M. `npm start` é apenas uma prévia local de arquivos. Os comandos desta conversão não enviam nada ao GitHub nem publicam o site automaticamente fora do workflow.
+1. Em **Settings → Pages**, selecione **Deploy from a branch → gh-pages → / (root)**.
+2. Execute `npm run deploy`. O comando gera `out/`, verifica a exportação e publica com `.nojekyll`, necessário para o GitHub servir os estilos e scripts em `_next/`.
+3. Aguarde a conclusão da publicação no GitHub e confira o site.
+
+Para somente gerar os arquivos, execute `npm run build`; isso não publica nada. O fluxo alternativo por GitHub Actions continua disponível e está explicado em [docs/GITHUB-PAGES.md](docs/GITHUB-PAGES.md).
+
+O site publicado não requer processo Node ou Python, banco de dados ou backend do A.D.A.M. `npm start` é apenas uma prévia local de arquivos; `npm run deploy` envia a exportação ao GitHub.
 
 ## Acessibilidade e escopo
 
