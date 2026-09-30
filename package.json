@@ -1,0 +1,47 @@
+{
+  "name": "siteadam",
+  "version": "1.0.0",
+  "description": "Site institucional e demonstração interativa do projeto A.D.A.M.",
+  "scripts": {
+    "test": "playwright test",
+    "assets": "node scripts/generate-social-image.mjs",
+    "predev": "npm run assets",
+    "dev": "next dev",
+    "prebuild": "npm run assets",
+    "build": "next build",
+    "postbuild": "node scripts/finalize-export.mjs",
+    "start": "node scripts/preview.mjs",
+    "preview": "node scripts/preview.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "check:publication": "node scripts/check-publication.mjs",
+    "audit:dependencies": "npm audit --audit-level=high",
+    "format": "prettier --write src scripts tests *.ts *.mjs *.json README.md docs .github",
+    "deploy": "gh-pages -d out"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "framer-motion": "^13.4.6",
+    "lucide-react": "^1.48.0",
+    "next": "^16.3.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@next/env": "16.3.7",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.7",
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.9.9",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "private": true
+}
